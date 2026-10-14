@@ -1,4 +1,11 @@
+import { ListaRutas } from "./components/ListaRutas";
+import { rutas } from "./datos/rutas";
+import { filtrarPorDificultad, ordenarRutas } from "./funciones/rutas";
+
 function App() {
+  const rutasFiltradas = filtrarPorDificultad(rutas, "todas");
+  const rutasVisibles = ordenarRutas(rutasFiltradas, "precio");
+
   return (
     <>
       <header className="encabezado">
@@ -11,7 +18,8 @@ function App() {
         </section>
         <section className="rutas">
           <h2>Rutas para explorar</h2>
-          <p>Pronto encontrarás aquí las experiencias disponibles.</p>
+          <p>Se encontraron {rutasVisibles.length} rutas</p>
+          <ListaRutas rutas={rutasVisibles} />
         </section>
       </main>
       <footer>MONTAÑA · CULTURA · NATURALEZA</footer>
