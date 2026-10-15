@@ -1,6 +1,7 @@
 import { ListaRutas } from "./components/ListaRutas";
 import { rutas } from "./datos/rutas";
 import { filtrarPorDificultad, ordenarRutas } from "./funciones/rutas";
+import "./App.css";
 
 function App() {
   const rutasFiltradas = filtrarPorDificultad(rutas, "todas");
@@ -8,21 +9,62 @@ function App() {
 
   return (
     <>
-      <header className="encabezado">
-        <p>QUINDÍO · COLOMBIA</p>
+      <header className="barra-superior">
+        <a className="marca" href="#inicio" aria-label="Quindío, inicio">
+          <span className="marca-simbolo">Q</span>
+          <span>quindío<small>colombia</small></span>
+        </a>
+        <p className="barra-nota">Una pausa entre montañas</p>
+        <p className="barra-indice">GUÍA DE VIAJE <span>·</span> 2026</p>
       </header>
-      <main>
-        <section className="presentacion">
-          <h1>Rutas turísticas del Quindío</h1>
-          <p>Una guía para descubrir los paisajes y municipios del departamento.</p>
+
+      <main id="inicio">
+        <section className="hero">
+          <div className="hero-texto">
+            <p className="etiqueta"><span /> DEPARTAMENTO DEL QUINDÍO, COLOMBIA</p>
+            <h1>Hay caminos<br />que <em>se sienten.</em></h1>
+            <p className="hero-descripcion">
+              Siete maneras de descubrir pueblos, montañas y senderos. Elige
+              el ritmo; el paisaje pone el resto.
+            </p>
+            <div className="hero-indice">
+              <span>01 / 07</span>
+              <span>RUTAS PARA EXPLORAR</span>
+            </div>
+          </div>
+          <div className="hero-paisaje" aria-label="Ilustración abstracta de montañas del Quindío" role="img">
+            <div className="paisaje-sol" />
+            <div className="paisaje-montana montana-lejana" />
+            <div className="paisaje-montana montana-cercana" />
+            <div className="paisaje-contorno contorno-uno" />
+            <div className="paisaje-contorno contorno-dos" />
+            <p className="paisaje-leyenda">CORDILLERA CENTRAL <span>·</span> QUINDÍO</p>
+          </div>
         </section>
-        <section className="rutas">
-          <h2>Rutas para explorar</h2>
-          <p>Se encontraron {rutasVisibles.length} rutas</p>
+
+        <section className="datos-rapidos" aria-label="Resumen de la selección">
+          <p><strong>07</strong><span>rutas de origen</span></p>
+          <p><strong>03–09</strong><span>horas de recorrido</span></p>
+          <p><strong>Desde $40.000</strong><span>por persona</span></p>
+        </section>
+
+        <section className="catalogo" aria-labelledby="titulo-rutas">
+          <div className="catalogo-cabecera">
+            <div>
+              <p className="etiqueta-seccion">EL TERRITORIO, A TU PASO</p>
+              <h2 id="titulo-rutas">Rutas para descubrir</h2>
+            </div>
+            <p className="catalogo-cuenta">{rutasVisibles.length} EXPERIENCIAS <span>·</span> QUINDÍO</p>
+          </div>
           <ListaRutas rutas={rutasVisibles} />
         </section>
       </main>
-      <footer>MONTAÑA · CULTURA · NATURALEZA</footer>
+
+      <footer className="pie-pagina">
+        <span>QUINDÍO, COLOMBIA</span>
+        <span>MONTAÑA · CULTURA · NATURALEZA</span>
+        <span>RUTAS DE ORIGEN / 03</span>
+      </footer>
     </>
   );
 }
