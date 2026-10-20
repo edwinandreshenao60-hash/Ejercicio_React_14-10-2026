@@ -11,6 +11,25 @@ export function filtrarPorDificultad(
   return lista.filter((ruta) => ruta.dificultad === dificultad);
 }
 
+export function filtrarPorTexto(lista: Ruta[], texto: string): Ruta[] {
+  const textoBuscado = texto.trim().toLocaleLowerCase();
+
+  return lista.filter((ruta) => {
+    const nombre = ruta.nombre.toLocaleLowerCase();
+    const municipio = ruta.municipio.toLocaleLowerCase();
+
+    if (nombre.includes(textoBuscado)) {
+      return true;
+    }
+
+    if (municipio.includes(textoBuscado)) {
+      return true;
+    }
+
+    return false;
+  });
+}
+
 export function ordenarRutas(
   lista: Ruta[],
   criterio: "precio" | "duracion",

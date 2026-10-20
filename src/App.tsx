@@ -1,11 +1,14 @@
+import { useState } from "react";
 import { ListaRutas } from "./components/ListaRutas";
 import { rutas } from "./datos/rutas";
-import { filtrarPorDificultad, ordenarRutas } from "./funciones/rutas";
+import { filtrarPorDificultad, filtrarPorTexto, ordenarRutas } from "./funciones/rutas";
 import "./App.css";
 
 function App() {
+  const [busqueda, setBusqueda] = useState("");
   const rutasFiltradas = filtrarPorDificultad(rutas, "todas");
-  const rutasVisibles = ordenarRutas(rutasFiltradas, "precio");
+  const rutasCoincidentes = filtrarPorTexto(rutasFiltradas, busqueda);
+  const rutasVisibles = ordenarRutas(rutasCoincidentes, "precio");
 
   return (
     <>
@@ -56,6 +59,15 @@ function App() {
             </div>
             <p className="catalogo-cuenta">{rutasVisibles.length} EXPERIENCIAS <span>·</span> QUINDÍO</p>
           </div>
+          <label className="busqueda-rutas">
+            Buscar por ruta o municipio
+            <input
+              type="search"
+              value={busqueda}
+              onChange={(evento) => setBusqueda(evento.target.value)}
+              placeholder="Ej. Salento"
+            />
+          </label>
           <ListaRutas rutas={rutasVisibles} />
         </section>
       </main>
