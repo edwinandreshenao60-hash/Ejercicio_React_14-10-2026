@@ -5,6 +5,12 @@ interface TarjetaRutaProps {
 }
 
 export function TarjetaRuta({ ruta }: TarjetaRutaProps) {
+  let transporte = null;
+
+  if (ruta.incluyeTransporte) {
+    transporte = <p className="transporte">Incluye transporte</p>;
+  }
+
   return (
     <article className="tarjeta">
       <div className="tarjeta-cabecera">
@@ -26,7 +32,7 @@ export function TarjetaRuta({ ruta }: TarjetaRutaProps) {
           })}
           <span>por persona</span>
         </p>
-        {ruta.incluyeTransporte && <p className="transporte">Incluye transporte</p>}
+        {transporte}
       </div>
       <label className="personas">
         Personas

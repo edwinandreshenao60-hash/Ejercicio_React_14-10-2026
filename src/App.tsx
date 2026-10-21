@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { ListaRutas } from "./components/ListaRutas";
-import { rutas } from "./datos/rutas";
+import { rutas, type Dificultad } from "./datos/rutas";
 import { filtrarPorDificultad, filtrarPorTexto, ordenarRutas } from "./funciones/rutas";
 import "./App.css";
 
 function App() {
   const [busqueda, setBusqueda] = useState("");
-  const rutasFiltradas = filtrarPorDificultad(rutas, "todas");
-  const rutasCoincidentes = filtrarPorTexto(rutasFiltradas, busqueda);
-  const rutasVisibles = ordenarRutas(rutasCoincidentes, "precio");
+  const [dificultad, setDificultad] = useState<Dificultad | "todas">("todas");
+  const [criterioOrden, setCriterioOrden] = useState<"precio" | "duracion">("precio");
+  const rutasPorDificultad = filtrarPorDificultad(rutas, dificultad);
+  const rutasCoincidentes = filtrarPorTexto(rutasPorDificultad, busqueda);
+  const rutasVisibles = ordenarRutas(rutasCoincidentes, criterioOrden);
 
   return (
     <>
@@ -59,15 +61,39 @@ function App() {
             </div>
             <p className="catalogo-cuenta">{rutasVisibles.length} EXPERIENCIAS <span>·</span> QUINDÍO</p>
           </div>
-          <label className="busqueda-rutas">
-            Buscar por ruta o municipio
-            <input
-              type="search"
-              value={busqueda}
-              onChange={(evento) => setBusqueda(evento.target.value)}
-              placeholder="Ej. Salento"
-            />
-          </label>
+          <div className="controles-catalogo">
+            <label className="control-catalogo">
+              Buscar por ruta o municipio
+              <input
+                type="search"
+                value={busqueda}
+                onChange={(evento) => setBusqueda(evento.target.value)}
+                placeholder="Ej. Salento"
+              />
+            </label>
+            <label className="control-catalogo">
+              Dificultad
+              <select
+                value={dificultad}
+                onChange={(evento) => setDificultad(evento.target.value as Dificultad | "todas")}
+              >
+                <option value="todas">Todas</option>
+                <option value="baja">Baja</option>
+                <option value="media">Media</option>
+                <option value="alta">Alta</option>
+              </select>
+            </label>
+            <label className="control-catalogo">
+              Ordenar por
+              <select
+                value={criterioOrden}
+                onChange={(evento) => setCriterioOrden(evento.target.value as "precio" | "duracion")}
+              >
+                <option value="precio">Precio</option>
+                <option value="duracion">Duración</option>
+              </select>
+            </label>
+          </div>
           <ListaRutas rutas={rutasVisibles} />
         </section>
       </main>
