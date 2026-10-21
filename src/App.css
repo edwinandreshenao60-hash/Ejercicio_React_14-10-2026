@@ -199,6 +199,12 @@ h2 {
 
 .catalogo-cuenta { margin: 0 0 5px; color: #7a7a6e; font-size: 9px; letter-spacing: 0.13em; }
 .catalogo-cuenta span { padding: 0 4px; color: #a69b75; }
+.controles-catalogo { display: grid; grid-template-columns: minmax(220px, 1.5fr) repeat(2, minmax(150px, 0.7fr)); gap: 12px; margin: 0 0 24px; }
+.control-catalogo { display: grid; gap: 7px; color: #74766b; font-size: 10px; }
+.control-catalogo input,
+.control-catalogo select { min-height: 40px; padding: 0 11px; border: 1px solid #d7d4c8; border-radius: 0; background: rgba(255, 255, 255, 0.45); color: #30342c; font: inherit; }
+.control-catalogo input:focus-visible,
+.control-catalogo select:focus-visible { outline: 2px solid #748561; outline-offset: 2px; }
 .lista-rutas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px; align-items: start; }
 
 .tarjeta {
@@ -288,6 +294,7 @@ h3 {
   .catalogo { padding: 60px 0 70px; }
   .catalogo-cabecera { display: block; }
   .catalogo-cuenta { margin-top: 15px; }
+  .controles-catalogo { grid-template-columns: 1fr; }
   .lista-rutas { grid-template-columns: 1fr; gap: 12px; }
   .tarjeta:nth-child(2n) { margin-top: 0; }
   .tarjeta { min-height: 260px; }
